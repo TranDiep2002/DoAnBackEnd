@@ -9,7 +9,6 @@ import com.example.doan2.req.sinhVienReq.SinhVien_InsertReq;
 import com.example.doan2.req.sinhVienReq.SinhVien_UpdateReq;
 import com.example.doan2.service.MailService;
 import com.example.doan2.service.SinhVienImportService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,7 +16,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +34,7 @@ import java.util.Optional;
 @CrossOrigin(value = "*")
 @Slf4j
 public class SinhVienController {
+    private SinhVienImportService sinhVienImportService;
     @Autowired
     private SinhVienRepository sinhVienRepo;
     @Autowired
@@ -46,7 +45,10 @@ public class SinhVienController {
     @Autowired
     private MailService mailService;
 
-    private SinhVienImportService sinhVienImportService;
+    public SinhVienController(SinhVienImportService sinhVienImportService) {
+        this.sinhVienImportService = sinhVienImportService;
+    }
+
 
     @GetMapping("getallSinhVien")
     public ResponseEntity<?> getAllSinhVien(){

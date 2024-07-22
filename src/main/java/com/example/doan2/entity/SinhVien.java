@@ -19,7 +19,6 @@ import java.util.List;
 public class SinhVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String hoTen;
     private String maSV;

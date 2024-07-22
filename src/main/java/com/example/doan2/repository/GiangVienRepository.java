@@ -21,9 +21,9 @@ public interface GiangVienRepository extends JpaRepository<GiangVien,Integer> {
     @Override
     Optional<GiangVien> findById(Integer integer);
     void deleteById(Integer id);
-
+// vì ở đây có not in nên số lượng mới lớn hơn 6
     @Query(value = "from GiangVien g where g.id not in " +
-            "(select gk2.giangVien.id  from GiangVien_Ky gk2 join Ky k on gk2.ky.id = k.id where gk2.soLuongSV>5 and k.tenKy=:tenKy and k.namHoc=:namHoc)")
+            "(select gk2.giangVien.id  from GiangVien_Ky gk2 join Ky k on gk2.ky.id = k.id where gk2.soLuongSV>6 and k.tenKy=:tenKy and k.namHoc=:namHoc)")
     List<GiangVien> getGiangVienbySoLuongSV(String tenKy, String namHoc);
 
     @Query(value = "select g.boMon from GiangVien g where g.maGV = :maGV ")

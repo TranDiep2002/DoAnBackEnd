@@ -53,11 +53,11 @@ public class ExcelUploadSVService {
                         case 5-> sinhVien.setGioiTinh(cell.getStringCellValue());
                         case 6-> sinhVien.setLopHanhChinh(cell.getStringCellValue());
                         default -> {
-
                         }
                     }
                     cellIndex++;
                 }
+                System.out.print("Sinh Viên từ file:"+ sinhVien.getHoTen());
             sinhVienList.add(sinhVien);
             }
         } catch (IOException e) {

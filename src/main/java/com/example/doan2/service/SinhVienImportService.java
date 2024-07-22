@@ -31,25 +31,30 @@ public class SinhVienImportService {
     public void saveSinhVienToDatabase(MultipartFile file , String sheetName){
         if(ExcelUploadSVService.isValidExcelFile(file)){
             try {
-                List<SinhVien> sinhVienList= ExcelUploadSVService.getSinhVienFromExcel(file.getInputStream(),sheetName);
-                sinhVienList.forEach(sinhVien -> {
-                    sinhVien.setNgayTao(dateUntil.getDateNow());
-                    sinhVien.setNgayCapNhat(dateUntil.getDateNow());
-                    sinhVien.setActiveFlag(false);
-                    byte[] array = new byte[7]; // length is bounded by 7
-                    new Random().nextBytes(array);
-                    String generatedString = new String(array, Charset.forName("UTF-8"));
-                    TaiKhoan taiKhoan = new TaiKhoan();
-                    taiKhoan.setSinhVien(sinhVien);
-                    taiKhoan.setMaUser(sinhVien.getMaSV());
-                    taiKhoan.setPassWord(generatedString);
-                    taiKhoan.setLoaiTaiKhoan("SINHVIEN");
-                    taiKhoan.setNgayTao(dateUntil.getDateNow());
-                    taiKhoan.setActiveFlag(false);
-                    taiKhoanRepo.save(taiKhoan);
-                    mailService.senMail(sinhVien.getEmail(),"Mật khẩu của bạn là :"+taiKhoan.getPassWord());
-                    sinhVienRepo.save(sinhVien);
-                });
+                List<SinhVien> sinhVienList= excelUploadSVService.getSinhVienFromExcel(file.getInputStream(),sheetName);
+                if (sinhVienList!=null) {
+                    sinhVienList.forEach(sinhVien -> {
+                        sinhVien.setNgayTao(dateUntil.getDateNow());
+                        sinhVien.setNgayCapNhat(dateUntil.getDateNow());
+                        sinhVien.setActiveFlag(false);
+                        sinhVienRepo.save(sinhVien);
+                        byte[] array = new byte[7]; // length is bounded by 7
+                        new Random().nextBytes(array);
+                        String generatedString = new String(array, Charset.forName("UTF-8"));
+                        TaiKhoan taiKhoan = new TaiKhoan();
+                        taiKhoan.setSinhVien(sinhVien);
+                        taiKhoan.setMaUser(sinhVien.getMaSV());
+                        taiKhoan.setPassWord(generatedString);
+                        taiKhoan.setLoaiTaiKhoan("SINHVIEN");
+                        taiKhoan.setNgayTao(dateUntil.getDateNow());
+                        taiKhoan.setActiveFlag(false);
+                        taiKhoanRepo.save(taiKhoan);
+                        mailService.senMail(sinhVien.getEmail(), "Mật khẩu của bạn là :" + taiKhoan.getPassWord());
+                    });
+                }
+                else {
+                    System.out.println("Danh sách sinh viên null");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

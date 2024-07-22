@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeTaiRepository extends JpaRepository<DeTai, Integer> {
-    DeTai findByTenDeTai(String tenDeTai);
+    DeTai findByTenDeTaiAndMoTa(String tenDeTai,String moTa);
 }

@@ -16,11 +16,12 @@ public interface SinhVienRepository extends JpaRepository<SinhVien,Integer> {
     SinhVien findByMaSV(String maSV);
     Optional<SinhVien> findById(Integer id);
     void deleteById(Integer id);
-
+// lấy ra những sinh viên không nằm trong bảng sinh viên đề tài tại kỳ đó và năm học đó và mã sinh viên tài khoản đăng nhập vào
+    // phải trừ mã sinh viên vì khi hiện danh sách sẽ hiện trùng sinh viên đang đăng nhập
     @Query(value = "from SinhVien sv  where sv.id not in " +
             "(select sd.sinhVien.id from SinhVien_DeTai sd join Ky k " +
-            "on sd.ky.id = k.id where k.tenKy=:tenKy and k.namHoc=:namHoc)")
-    List<SinhVien> getSinhVienbyKyandNam(String tenKy,String namHoc);
+            "on sd.ky.id = k.id where k.tenKy=:tenKy and k.namHoc=:namHoc ) and sv.maSV <>:maSV")
+    List<SinhVien> getSinhVienbyKyandNam(String tenKy,String namHoc,String maSV);
 
     @Query(value = "from SinhVien  v where v.hoTen like %:hoTen% ")
     List<SinhVien> getSinhVienbyhoTen(String hoTen);

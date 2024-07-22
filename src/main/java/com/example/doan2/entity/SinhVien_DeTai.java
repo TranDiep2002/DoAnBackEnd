@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Table
@@ -39,6 +40,7 @@ public class SinhVien_DeTai {
     @ManyToOne
     @JoinColumn(name = "ky_id")
     private Ky ky;
+
 
     // thiếu quan hệ điểm thành phần đề tài
 }

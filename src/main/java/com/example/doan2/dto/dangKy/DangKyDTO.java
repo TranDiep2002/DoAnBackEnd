@@ -14,6 +14,7 @@ public class DangKyDTO {
     private Date ngayCapNhat;
     private List<String> tenSinhViens;
     private String hoTen;
+    private String maGV; // lấy mã giảng viên để update tráng thái
     private String tenDeTai;
     private String moTaDeTai;
     private String tenKy;

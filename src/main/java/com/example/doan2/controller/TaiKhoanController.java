@@ -51,6 +51,7 @@ public class TaiKhoanController {
     @PostMapping("login")
     public String login(@RequestBody TaiKhoanLoginReq taiKhoanLoginReq){
         UserDetail userDetail= (UserDetail) userService.loadUserByUsername(taiKhoanLoginReq.getMaUser());
+
         if (userDetail!=null&& passwordEncoder.matches(taiKhoanLoginReq.getPassWord(),userDetail.getPassword())){
             String token = jwtTokenProvider.generateToken(userDetail);
             return token;

@@ -46,11 +46,6 @@ public class ConfigSecurity {
         corsConfig.addAllowedMethod("*");
         corsConfig.addAllowedHeader("*");
 
-//        corsConfig.addAllowedOrigin("http://localhost:3000");
-//        corsConfig.setAllowCredentials(true);
-//        corsConfig.addAllowedMethod("*");
-//        corsConfig.addAllowedHeader("*");
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
         return source;

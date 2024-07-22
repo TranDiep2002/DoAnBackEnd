@@ -46,7 +46,7 @@ public class ThongBaoController {
     public ResponseEntity<?> ThemThongBao(@RequestBody ThongBao_InsertReq thongBao_insertReq){
         Ky ky = kyRepo.findByTrangThai("Đang tiến hành");
         ThongBao thongBao = new ThongBao();
-        thongBao.setNgayBatDau(dateUntil.getDateNow());
+        thongBao.setNgayBatDau(thongBao_insertReq.getNgayBatDau());
         thongBao.setNoiDungThongBao(thongBao_insertReq.getNoiDungThongBao());
         thongBao.setNgayKetThuc(thongBao_insertReq.getNgayKetThuc());
         thongBao.setKy(ky);

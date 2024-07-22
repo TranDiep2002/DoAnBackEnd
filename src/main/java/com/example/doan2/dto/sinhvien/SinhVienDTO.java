@@ -15,6 +15,4 @@ public class SinhVienDTO {
     private String lopHanhChinh;
     private Date ngayTao;
     private Date ngayCapNhat;
-
-
 }

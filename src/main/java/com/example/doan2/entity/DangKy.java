@@ -21,6 +21,7 @@ public class DangKy {
     private Date ngayTao;
     private Date ngayCapNhat;
     private Boolean activeFlag;
+    private String ghiChu;
 
     @ManyToOne
     @JoinColumn(name = "sinh_vien_id")

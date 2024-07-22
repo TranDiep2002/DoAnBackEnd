@@ -1,5 +1,6 @@
 package com.example.doan2.repository;
 
+import com.example.doan2.entity.DeTai;
 import com.example.doan2.entity.Ky;
 import com.example.doan2.entity.SinhVien;
 import com.example.doan2.entity.SinhVien_DeTai;
@@ -19,6 +20,9 @@ public interface SinhVien_DeTaiRepository extends JpaRepository<SinhVien_DeTai,I
     // thống kê số sinh viên mà giảng viên đã hướng dẫn trong kỳ đó để đưa ra giới hạn
     @Query(value = "select count(sinhVien) from SinhVien_DeTai  where giangVien.id = :id")
     Integer soluongSV(Integer id);
+    // lấy ra tất cả các đề tài theo kỳ
+    @Query(value = "select distinct s.deTai from SinhVien_DeTai s where  s.ky=:ky")
+    List<DeTai> getAllDeTaiByKy(Ky ky);
 
     List<SinhVien_DeTai> findBySinhVien(SinhVien sinhVien);
 }
